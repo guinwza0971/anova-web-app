@@ -1,0 +1,20 @@
+{
+  "name": "anova-web-app",
+  "version": "1.0.0",
+  "description": "A simple web application for performing ANOVA statistical analysis on CSV data.",
+  "main": "src/scripts/app.js",
+  "scripts": {
+    "test": "jest",
+    "start": "live-server src"
+  },
+  "dependencies": {
+    "jstat": "^1.9.6",
+    "live-server": "^1.2.2",
+    "papaparse": "^5.5.2"
+  },
+  "devDependencies": {
+    "jest": "^27.0.0"
+  },
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANOVA Statistical Analysis App</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@latest/papaparse.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>ANOVA Statistical Analysis</h1>
+        <form id="data-form">
+            <div class="input-group">
+                <label for="data-input">Enter Data (separate columns with commas, press Enter for new row):</label>
+                <textarea id="data-input" rows="10" placeholder="Example:&#10;23, 25, 22, 27, 24&#10;30, 28, 29, 31, 32&#10;20, 19, 21, 18, 22" required></textarea>
+            </div>
+
+            <div class="input-group">
+                <label for="num-rows">Number of Rows:</label>
+                <input type="number" id="num-rows" min="2" required>
+            </div>
+
+            <div class="input-group">
+                <label for="num-columns">Number of Columns:</label>
+                <input type="number" id="num-columns" min="2" required>
+            </div>
+
+            <div class="input-group">
+                <label>Sample Groups Divided By:</label>
+                <div class="radio-group">
+                    <label>
+                        <input type="radio" name="grouping" value="rows" checked> Rows
+                    </label>
+                    <label>
+                        <input type="radio" name="grouping" value="columns"> Columns
+                    </label>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Variance Homogeneity Test:</label>
+                <div class="radio-group">
+                    <label>
+                        <input type="radio" name="variance-test" value="levene" checked> Levene's Test
+                        <span class="tooltip" data-tooltip="Less sensitive to non-normality">ℹ️</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="variance-test" value="bartlett"> Bartlett's Test
+                        <span class="tooltip" data-tooltip="More powerful but assumes normality">ℹ️</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>ANOVA Type:</label>
+                <div class="radio-group">
+                    <label>
+                        <input type="radio" name="anova-type" value="standard" checked> Standard ANOVA
+                        <span class="tooltip" data-tooltip="Use when variances are similar across groups">ℹ️</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="anova-type" value="welch"> Welch's ANOVA
+                        <span class="tooltip" data-tooltip="Use when variances are significantly different across groups">ℹ️</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Post-hoc Test:</label>
+                <div class="radio-group">
+                    <label>
+                        <input type="radio" name="posthoc-test" value="tukey" checked> Tukey's HSD
+                        <span class="tooltip" data-tooltip="Use when variances are similar (after standard ANOVA)">ℹ️</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="posthoc-test" value="games-howell"> Games-Howell
+                        <span class="tooltip" data-tooltip="Use when variances are unequal (after Welch's ANOVA)">ℹ️</span>
+                    </label>
+                </div>
+            </div>
+
+            <button type="submit">Perform Analysis</button>
+        </form>
+
+        <div id="results">
+            <h2>Results:</h2>
+            <pre id="output"></pre>
+            <div id="posthoc-results"></div>
+        </div>
+    </div>
+    <script src="scripts/utils.js" type="module"></script>
+    <script src="scripts/statistics.js" type="module"></script>
+    <script src="scripts/app.js" type="module"></script>
+</body>
+</html>
